@@ -1,3 +1,5 @@
+import src.Edge;
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -8,7 +10,7 @@ import java.util.ArrayList;
  * Time: 11:59
  * To change this template use File | Settings | File Templates.
  */
-public class FileReader {
+public class GraphBuilderFromFile {
 
 
     public static int count(String filename) throws IOException {
@@ -53,20 +55,17 @@ public class FileReader {
                         j++;
                     }
                     //vertices
-                    int vertex = numbersInLine[0];
-                    vertices[i] = vertex;
-                    System.out.println("vertex " + vertices[i]);
+                    int vertex1 = numbersInLine[0];
+                    vertices[i] = vertex1;
+                    System.out.println("vertex " + vertex1);
                     i++;
 
                     //edges
-
-                    for (int w : numbersInLine) {
-                        if (vertex > w) {
-                            graph.addEdge(vertex, w);
-
+                    for (int vertex2 : numbersInLine) {
+                        if (vertex1 > vertex2) {
+                            graph.addEdge(new Edge(vertex1, vertex2));
                         }
                     }
-
                 }
 
             in.close();

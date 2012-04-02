@@ -1,4 +1,5 @@
-import java.io.FileNotFoundException;
+import src.Edge;
+
 import java.io.IOException;
 
 /**
@@ -11,16 +12,24 @@ import java.io.IOException;
 public class MinimumCut {
     
     public static void main (String[] args) {
+        
+
         try {
-//            int nLines = FileReader.count("/Users/lindseydew/Documents/workspace/min-cut/src/testdata.txt");
-            Graph graph = FileReader.fileRead("/Users/lindseydew/Documents/workspace/min-cut/src/testdata.txt", 4);
+            int nLines = GraphBuilderFromFile.count("/Users/lindseydew/Documents/workspace/min-cut/src/testdata.txt");
+            Graph graph = GraphBuilderFromFile.fileRead("/Users/lindseydew/Documents/workspace/min-cut/src/testdata.txt", nLines);
 
             System.out.println(graph.toString());
             System.out.println(graph.toEdgeListString());
             System.out.println(graph.toAdjacencyListString());
+            
+//            Contract contract = new Contract();
+//            Graph mergedGraph = contract.merge(new Edge(2,0), graph);
+//
+//            System.out.println(mergedGraph.toString());
+//            System.out.println(mergedGraph.toEdgeListString());
+//            System.out.println(mergedGraph.toAdjacencyListString());
 
-
-
+            
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -28,8 +37,8 @@ public class MinimumCut {
 
 //
 //        try {
-//            int nLines = FileReader.count("/Users/lindseydew/Documents/workspace/min-cut/src/graphdata.txt");
-//            Graph graph = FileReader.fileRead("/Users/lindseydew/Documents/workspace/min-cut/src/graphdata.txt", nLines);
+//            int nLines = GraphBuilderFromFile.count("/Users/lindseydew/Documents/workspace/min-cut/src/graphdata.txt");
+//            Graph graph = GraphBuilderFromFile.fileRead("/Users/lindseydew/Documents/workspace/min-cut/src/graphdata.txt", nLines);
 //
 //            System.out.println(graph.toString());
 //            System.out.println(graph.toEdgeListString());
