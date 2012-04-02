@@ -1,4 +1,5 @@
-import java.io.BufferedReader;
+import java.io.*;
+import java.util.ArrayList;
 
 /**
  * Created by IntelliJ IDEA.
@@ -9,18 +10,85 @@ import java.io.BufferedReader;
  */
 public class FileReader {
 
-//    public static Graph fileRead(String filename) {
-//
-//        BufferedReader br = new BufferedReader(new StreamReader(System.in));
-//        String line = br.readLine();
-//
-//
+
+    public static int count(String filename) throws IOException {
+        InputStream is = new BufferedInputStream(new FileInputStream(filename));
+        try {
+            byte[] c = new byte[1024];
+            int count = 1;
+            int readChars = 0;
+            while ((readChars = is.read(c)) != -1) {
+                for (int i = 0; i < readChars; ++i) {
+                    if (c[i] == '\n')
+                        ++count;
+                }
+            }
+            return count;
+        } finally {
+            is.close();
+        }
+    }
+
+    public static Graph fileRead(String filename, int nLines) throws FileNotFoundException {
+        Graph graph = new Graph(nLines);
+        try {
+            FileInputStream fstream = new FileInputStream(filename);
+            DataInputStream in = new DataInputStream(fstream);
+            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+            String line;
+//            ArrayList<String> vertices = new ArrayList<String>();
+            int[] vertices = new int[nLines];
+
+            //vertices
+            int i = 0;
+            //add condition not to be empty string
+            while ((line = br.readLine()) != null ){
+
+                    int[] numbersInLine = new int[line.split("\\s+").length];
+                    int j = 0;
+                    //populate the integer array
+                    for (String s : line.split("\\s+")) {
+                        int num = Integer.parseInt(s);
+                        numbersInLine[j] = num;
+                        j++;
+                    }
+                    //vertices
+                    int vertex = numbersInLine[0];
+                    vertices[i] = vertex;
+                    System.out.println("vertex " + vertices[i]);
+                    i++;
+
+                    //edges
+
+                    for (int w : numbersInLine) {
+                        if (vertex > w) {
+                            graph.addEdge(vertex, w);
+
+                        }
+                    }
+
+                }
+
+            in.close();
+
+
+        } catch (Exception e) {//Catch exception if any
+            System.err.println("Error: " + e.getMessage());
+        }
+
+
+        return graph;
+    }     
+
+    
+}
+
 //        if (line != null) {
-//            //read nodes
-//            String[] nodeNames = line.split(" ");
-//            int[] nodes = new int[nodeNames.length]
-//            for (int i = 0; i < nodes.length; ++i) {
-//                nodes[i] = Integer.parseInt(nodeNames[i]);
+//            //read vertex
+//            String[] vertexNames = line.split(" ");
+//            int[] vertices = new int[vertexNames.length];
+//            for (int i = 0; i < vertices.length; ++i) {
+//                vertices[i] = Integer.parseInt(vertexNames[i]);
 //            }
 //
 //            //create graph
@@ -41,9 +109,8 @@ public class FileReader {
 //        }
 //        br.close();
 //    }
-//    catch(exceptions) {
-//        handle them
-//    }
-//
-//}
-}
+
+
+
+
+

@@ -1,3 +1,6 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 /**
  * Created by IntelliJ IDEA.
  * User: lindseydew
@@ -8,28 +11,37 @@
 public class MinimumCut {
     
     public static void main (String[] args) {
-        System.out.println("hello world");
+        try {
+//            int nLines = FileReader.count("/Users/lindseydew/Documents/workspace/min-cut/src/testdata.txt");
+            Graph graph = FileReader.fileRead("/Users/lindseydew/Documents/workspace/min-cut/src/testdata.txt", 4);
+
+            System.out.println(graph.toString());
+            System.out.println(graph.toEdgeListString());
+            System.out.println(graph.toAdjacencyListString());
 
 
-        //data = new filereader(..path..);
-        //Contract graph = new Contract(data);
-        //minGraph = Contract.contract(graph)
-        //int numEdges = cutSet(minGraph)
-        //System.out.println(numEdges)
 
-        Graph graph = new Graph(4, 5);
-//        int edge = graph.chooseEdgeAtRandom();
-//        System.out.println("edge " + edge);
-        System.out.println(graph.toString());
-        System.out.println(graph.toArrayListString());
-        
-        graph.removeSelfLoops();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        System.out.println(graph.toString());
-        System.out.println(graph.toArrayListString());
+//
+//        try {
+//            int nLines = FileReader.count("/Users/lindseydew/Documents/workspace/min-cut/src/graphdata.txt");
+//            Graph graph = FileReader.fileRead("/Users/lindseydew/Documents/workspace/min-cut/src/graphdata.txt", nLines);
+//
+//            System.out.println(graph.toString());
+//            System.out.println(graph.toEdgeListString());
+//            System.out.println(graph.toAdjacencyListString());
+//
+//
+//
+//        }
+//        catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
-        
-        
     }
 
 

@@ -40,7 +40,6 @@ public class Graph {
             addEdge(1, 2);
             addEdge(1, 3);
             addEdge(2, 3);
-            addEdge(0, 0);
         }
 //
 //        /**
@@ -126,7 +125,7 @@ public class Graph {
         }
     
     
-        public String toArrayListString() {
+        public String toEdgeListString() {
             StringBuilder s = new StringBuilder();
             String NEWLINE = System.getProperty("line.separator");
             s.append(V + " vertices, " + E + " edges" + NEWLINE);
@@ -148,12 +147,35 @@ public class Graph {
             return s.toString();
         }
 
+        public String toAdjacencyListString() {
+            StringBuilder s = new StringBuilder();
+            String NEWLINE = System.getProperty("line.separator");
+            s.append(V + " vertices, " + E + " edges" + NEWLINE);
+            s.append("{ ");
+                for(int v = 0; v < V; v++) {
+                    s.append("[ ");
+                    for (int w : adj[v]) {
+                        s.append(w + " ");
+                        
+                    }
+                    s.append("]");
+                }
+            s.append(" }");
+            return s.toString();
+        }
 
-        public int chooseEdgeAtRandom() {
+
+
+
+        public void chooseEdgeAtRandom() {
             Random generator = new Random();
-            int edge = generator.nextInt(E);
+            int vertex = generator.nextInt(V);
+            System.out.println("vertex " + vertex);
+            int length = adj[vertex].size();
+            int indw = generator.nextInt(length);
+            Integer edge = adj[vertex].get(indw);
+            System.out.println("edge " + edge);
 
-            return edge;
         }
 
         public void mergeEdge(int edge) {
@@ -164,19 +186,11 @@ public class Graph {
 
         }
 
-        public void removeSelfLoops() {
-            for(int v = 0; v < V; v++) {
-                    for(int i : adj[v])
-                    if(v==adj[v].get(i)){
-                        int w = adj[v].get(i);
-                        adj[v].remove(i);
-                        E--;
-
-                    }
-            }
-
-
-        }
+//        public void removeSelfLoops() {
+//            for(int v = 0; v < V; v++) {
+//
+//            }
+//        }
 
 
 
@@ -189,17 +203,17 @@ public class Graph {
 //    return graph
 //    }
     
-        public void contract(Graph graph) {
-            while(graph.getV() > 2) {
-                int edge = graph.chooseEdgeAtRandom();
-
-
-
-            }
-            
-            
-            
-        }
+//        public void contract(Graph graph) {
+//            while(graph.getV() > 2) {
+//                int edge = graph.chooseEdgeAtRandom();
+//
+//
+//
+//            }
+//
+//
+//
+//        }
 
 }
 
